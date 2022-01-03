@@ -17,17 +17,14 @@ describe("should return items", () => {
   };
 
   const headlinesCount = 7;
-    const discoversCount = 6;
-    const favoritesCount = 5;
-    const sectionsCount = 8;
-    const sectionsListCount = 3
+  const discoversCount = 6;
+  const favoritesCount = 5;
+  const sectionsCount = 8;
+  const sectionsListCount = 3;
 
   it("Should return all the elements the home page expects", async () => {
     const server = http.createServer(requestListener);
     const response = await request.agent(server).get("/api/articles");
-
-    ;
-
 
     expect(response.body.headlines.length).toEqual(headlinesCount);
     expect(response.body.discovers.length).toEqual(discoversCount);
@@ -35,7 +32,6 @@ describe("should return items", () => {
     expect(response.body.sections.length).toEqual(sectionsCount);
 
     for (let i = 0; i < sectionsCount; i++) {
-      console.log("passou: ", response.body.sections[i].list)
       expect(response.body.sections[i].list.length).toEqual(sectionsListCount);
     }
     server.close();
@@ -66,7 +62,6 @@ describe("should return items", () => {
         expect(response.body.sections[i].list[j]).toBeDefined();
       }
     }
-
 
     server.close();
   });
