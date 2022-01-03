@@ -1,5 +1,5 @@
 import React from "react";
-import http from "../../src/http";
+import http from "../../util/http";
 import { useSession, signIn } from "next-auth/react";
 
 import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";

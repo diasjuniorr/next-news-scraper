@@ -1,5 +1,5 @@
 import type {GetStaticProps } from "next";
-import http from "../src/http";
+import http from "../util/http";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import HeadlinePrimary from "../components/HeadlinePrimary";
