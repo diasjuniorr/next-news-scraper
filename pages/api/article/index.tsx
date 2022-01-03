@@ -17,7 +17,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ArticleResponse | Err>
 ) {
-  const {method } = req
+  return new Promise<void>( async (resolve, reject) => {
+      const {method } = req
   
   if (method !== "POST") {
     res.status(404).json({ error: "Method not allowed" });
@@ -39,14 +40,20 @@ export default async function handler(
         paragraphs.push($(el).text())
       })
 
-     console.log("DEBUG", title) 
     return res.status(200).json({title,paragraphs});
+    resolve()
     }).catch((err) => {
+      console.log("ERROR", err)
+      res.status(404).json({ error: "Not found" });
+      reject()
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Internal Server Error" });
+     res.status(500).json({ error: "Internal Server Error" });
+     resolve()
   }
+
+  })
 }
 
 function decodeSlash(url: string) {

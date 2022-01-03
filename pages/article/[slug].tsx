@@ -2,7 +2,7 @@ import React from "react";
 import http from "../../src/http";
 import { useSession, signIn } from "next-auth/react";
 
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Container, Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
@@ -96,42 +96,52 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
   );
 };
 
-interface Path {
-  params: { slug: string };
-}
-
-export const getStaticPaths: GetStaticPaths = async (context: any) => {
-  const res = await http("articles");
-  const articles = await res.data;
-
-  let paths: Path[] = [];
-
-  articles.headlines.map((article: Headline) =>
-    paths.push({ params: { slug: article.href } })
-  );
-
-  articles.discovers.map((article: Discover) =>
-    paths.push({ params: { slug: article.href } })
-  );
-
-  articles.favorites.map((article: Favorite) =>
-    paths.push({ params: { slug: article.href } })
-  );
-
-  articles.sections.map((article: Section) =>
-    article.list.map((item) => paths.push({ params: { slug: item.href } }))
-  );
-
-  console.log("DEBUG: \n", paths.length,  "\n");
-  return { paths, fallback: false };
-};
-
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { slug } = context.params;
   const res = await http.post("article", { slug });
   const article = res.data;
 
-  return { props: { article }, revalidate: 1 * 60 * 5 };
+  return {
+    props: {article},
+  };
 };
+
+// example of static generated page
+// interface Path {
+//   params: { slug: string };
+// }
+
+// export const getStaticPaths: GetStaticPaths = async (context: any) => {
+//   const res = await http("articles");
+//   const articles = await res.data;
+
+//   let paths: Path[] = [];
+
+//   articles.headlines.map((article: Headline) =>
+//     paths.push({ params: { slug: article.href } })
+//   );
+
+//   articles.discovers.map((article: Discover) =>
+//     paths.push({ params: { slug: article.href } })
+//   );
+
+//   articles.favorites.map((article: Favorite) =>
+//     paths.push({ params: { slug: article.href } })
+//   );
+
+//   articles.sections.map((article: Section) =>
+//     article.list.map((item) => paths.push({ params: { slug: item.href } }))
+//   );
+
+//   return { paths, fallback: false };
+// };
+
+// export const getStaticProps: GetStaticProps = async (context: any) => {
+//   const { slug } = context.params;
+//   const res = await http.post("article", { slug });
+//   const article = res.data;
+
+//   return { props: { article }, revalidate: 1 * 60 * 5 };
+// };
 
 export default ArticlePage;
