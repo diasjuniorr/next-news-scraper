@@ -23,8 +23,7 @@ interface ArticlesListPageProps {
 }
 
 export default function Home({ articles }: ArticlesListPageProps) {
-  const {headlines, discovers, favorites, sections} = articles;
-  console.log("DEBUG vercel_URL: ", process.env.NEXT_PUBLIC_VERCEL_URL);
+  const { headlines, discovers, favorites, sections } = articles;
   return (
     <Layout>
       <Container maxWidth="lg">
@@ -123,10 +122,18 @@ export default function Home({ articles }: ArticlesListPageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = await getArticles();
+  try {
+    const articles = await getArticles();
+    
+    return {
+      props: { articles },
+      revalidate: 1 * 60 * 5,
+    };
+  } catch (e: any) {
+    console.log("request error:", e.message);
 
-  return {
-    props: { articles },
-    revalidate: 1 * 60 * 5,
-  };
+    return {
+      notFound: true,
+    };
+  }
 };
