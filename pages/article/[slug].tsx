@@ -2,14 +2,10 @@ import React from "react";
 import http from "../../util/http";
 import { useSession, signIn } from "next-auth/react";
 
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { Container, Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
-import Headline from "../../interfaces/Headline";
-import Discover from "../../interfaces/Discover";
-import Favorite from "../../interfaces/Favorite";
-import Section from "../../interfaces/Section";
 import Layout from "../../components/layout";
 
 interface Article {
@@ -40,7 +36,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
                 minHeight: "50vh",
               }}
             >
-              <Typography component="h1" variant="h2" marginBottom={4} >
+              <Typography component="h1" variant="h2" marginBottom={4}>
                 {article.title}
               </Typography>
               {article.paragraphs?.map((paragraph, index) => (
@@ -72,7 +68,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
             overflow: "hidden",
           }}
         >
-          <Typography component="h1" variant="h2" marginBottom={4} >
+          <Typography component="h1" variant="h2" marginBottom={4}>
             <Skeleton width={1000} />
             <Skeleton width={750} />
           </Typography>
@@ -102,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const article = res.data;
 
   return {
-    props: {article},
+    props: { article },
   };
 };
 
