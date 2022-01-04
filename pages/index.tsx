@@ -1,4 +1,5 @@
 import type { GetStaticProps } from "next";
+import { getArticles } from "./api/articles";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import HeadlinePrimary from "../components/HeadlinePrimary";
@@ -12,7 +13,6 @@ import Headline from "../interfaces/Headline";
 import Discover from "../interfaces/Discover";
 import Favorite from "../interfaces/Favorite";
 import Section from "../interfaces/Section";
-import { getArticles } from "./api/articles";
 interface ArticlesListPageProps {
   articles: {
     headlines: Headline[];
