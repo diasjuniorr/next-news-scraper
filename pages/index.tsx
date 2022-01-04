@@ -12,7 +12,7 @@ import Headline from "../interfaces/Headline";
 import Discover from "../interfaces/Discover";
 import Favorite from "../interfaces/Favorite";
 import Section from "../interfaces/Section";
-import handler, { getArticles } from "./api/articles";
+import { getArticles } from "./api/articles";
 interface ArticlesListPageProps {
   articles: {
     headlines: Headline[];
@@ -124,7 +124,7 @@ export default function Home({ articles }: ArticlesListPageProps) {
 export const getStaticProps: GetStaticProps = async () => {
   try {
     const articles = await getArticles();
-    
+
     return {
       props: { articles },
       revalidate: 1 * 60 * 5,
