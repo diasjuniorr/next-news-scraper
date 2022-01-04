@@ -7,7 +7,7 @@ import Favorite from "../../../interfaces/Favorite";
 import Section from "../../../interfaces/Section";
 import List from "../../../interfaces/List";
 
-const url = "https://www.economist.com";
+const website = "https://www.economist.com";
 
 interface ArticlesResponse {
   headlines: Headline[];
@@ -25,13 +25,20 @@ export default async function handler(
   res: NextApiResponse<ArticlesResponse | Err>
 ) {
   return new Promise<void>(async (resolve, reject) => {
-    res.status(200).json(await getArticles());
-    resolve();
+    try {
+      const articles = await getArticles();
+      res.status(200).json(articles);
+      resolve();
+    } catch (error: any | AxiosError) {
+      console.log("request failed: ", error);
+      res.status(500).json({ error: "Internal Server Error" });
+      reject();
+    }
   });
 }
 
 export async function getArticles(): Promise<ArticlesResponse | Err> {
-  return axios(url)
+  return axios(website)
     .then((response) => {
       const data = response.data;
       const $ = cheerio.load(data);

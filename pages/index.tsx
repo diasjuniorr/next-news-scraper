@@ -130,7 +130,7 @@ export const getStaticProps: GetStaticProps = async () => {
       revalidate: 1 * 60 * 5,
     };
   } catch (e: any) {
-    console.log("request error:", e.message);
+    console.log("error fetching static props:", e.message);
 
     return {
       notFound: true,
