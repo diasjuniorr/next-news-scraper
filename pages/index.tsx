@@ -1,5 +1,4 @@
-import type {GetStaticProps } from "next";
-import http from "../util/http";
+import type { GetStaticProps } from "next";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import HeadlinePrimary from "../components/HeadlinePrimary";
@@ -13,20 +12,19 @@ import Headline from "../interfaces/Headline";
 import Discover from "../interfaces/Discover";
 import Favorite from "../interfaces/Favorite";
 import Section from "../interfaces/Section";
-
+import handler, { getArticles } from "./api/articles";
 interface ArticlesListPageProps {
-  headlines: Headline[];
-  discovers: Discover[];
-  favorites: Favorite[];
-  sections: Section[];
+  articles: {
+    headlines: Headline[];
+    discovers: Discover[];
+    favorites: Favorite[];
+    sections: Section[];
+  };
 }
 
-export default function Home({
-  headlines,
-  discovers,
-  favorites,
-  sections,
-}: ArticlesListPageProps) {
+export default function Home({ articles }: ArticlesListPageProps) {
+  const {headlines, discovers, favorites, sections} = articles;
+  console.log("DEBUG vercel_URL: ", process.env.NEXT_PUBLIC_VERCEL_URL);
   return (
     <Layout>
       <Container maxWidth="lg">
@@ -125,11 +123,10 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await http.get("articles");
-  const { headlines, discovers, favorites, sections } = response.data;
+  const articles = await getArticles();
 
   return {
-    props: { headlines, discovers, favorites, sections },
+    props: { articles },
     revalidate: 1 * 60 * 5,
   };
 };

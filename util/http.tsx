@@ -1,9 +1,10 @@
 import axios from "axios";
+const url = process.env.NEXT_PUBLIC_VERCEL_URL
+  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL }/api`
+  : "http://localhost:3000/api";
 
-//TODO add env variables
 const http = axios.create({
-  baseURL: "http://localhost:3000/api",
-//   baseURL: process.env.NEXT_PUBLIC_STORE_API_URL,
+  baseURL: url,
 });
 
 export default http;

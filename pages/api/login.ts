@@ -11,6 +11,7 @@ async function userRoute(
   req: NextApiRequest,
   res: NextApiResponse<User | boolean>
 ) {
+  console.log("DEBUG LOGIN")
   const { username, password } = req.body;
 
   const account = users.find((u) => u.username === username);
