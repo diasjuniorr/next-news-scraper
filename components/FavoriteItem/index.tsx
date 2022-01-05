@@ -12,7 +12,7 @@ const FavoriteItem: React.FC<FavoriteProps> = ({ favorite, index }) => {
   return (
     <Box>
       <a href={link}>
-        <Typography variant="h6" fontSize={"1rem"}>
+        <Typography variant="h6" fontSize={"1.15rem"}>
           <span style={{ color: "red", fontSize: "1.5rem" }}>{index + 1}.</span>
           &nbsp;{favorite.title}
         </Typography>
