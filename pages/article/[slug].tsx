@@ -23,7 +23,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
   const { data: session, status } = useSession();
 
   {
-    if (status == "authenticated") {
+    if (status === "authenticated") {
       return (
         <Layout maxWidth="md">
           <Container component="main" maxWidth="md">
@@ -51,7 +51,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
     }
   }
 
-  if (status == "unauthenticated") {
+  if (status === "unauthenticated") {
     signIn();
   }
 
