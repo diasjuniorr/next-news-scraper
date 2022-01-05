@@ -45,9 +45,9 @@ export async function getArticles(): Promise<ArticlesResponse | Err> {
 
       const headlines: Headline[] = [];
       const favorites: Favorite[] = [];
-      const discovers: Discover[] = [];
       const sections: Section[] = [];
       const lists: List[][] = [];
+      let discovers: Discover[] = [];
 
       $("a", data).each((idx, el) => {
         const attr = $(el).attr("data-analytics");
@@ -141,6 +141,8 @@ export async function getArticles(): Promise<ArticlesResponse | Err> {
           sections.push(section);
         }
       });
+
+      discovers = discovers.slice(0, 3);
 
       return { headlines, discovers, favorites, sections };
     })

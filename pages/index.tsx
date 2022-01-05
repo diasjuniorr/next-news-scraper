@@ -69,15 +69,13 @@ export default function Home({ articles }: ArticlesListPageProps) {
           paddingBottom={4}
           className="background-secondary"
         >
-          <Grid item xs={12} sm={12} md={8} lg={4}>
-            <DiscoverComponent discover={discovers[0]} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={8} lg={4}>
-            <DiscoverComponent discover={discovers[1]} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={8} lg={4}>
-            <DiscoverComponent discover={discovers[2]} />
-          </Grid>
+          {discovers.map((discover, idx) => {
+            return (
+              <Grid key={idx} item xs={12} sm={12} md={8} lg={4}>
+                <DiscoverComponent discover={discover} />
+              </Grid>
+            );
+          })}
         </Grid>
         <div>
           <Grid container spacing={3} paddingTop={2}>
