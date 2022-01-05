@@ -13,7 +13,7 @@ async function userRoute(
 ) {
   const { username, password } = req.body;
 
-  const account = users.find((u) => u.username === username);
+  const account = users.find((user) => user.username === username);
 
   if (!account) {
     return res.status(401).json(false);
