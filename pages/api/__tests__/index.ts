@@ -17,7 +17,7 @@ describe("should return items", () => {
   };
 
   const headlinesCount = 7;
-  const discoversCount = 6;
+  const discoversCount = 3;
   const favoritesCount = 5;
   const sectionsCount = 8;
   const sectionsListCount = 3;
