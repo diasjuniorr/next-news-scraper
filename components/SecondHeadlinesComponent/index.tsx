@@ -6,7 +6,7 @@ interface HeadlineSecondaryProps {
   secondItem: Headline;
 }
 
-const HeadlineSecondary: React.FC<HeadlineSecondaryProps> = ({
+const SecondHeadlinesComponent: React.FC<HeadlineSecondaryProps> = ({
   firstItem,
   secondItem,
 }) => {
@@ -58,4 +58,4 @@ const HeadlineSecondary: React.FC<HeadlineSecondaryProps> = ({
   );
 };
 
-export default HeadlineSecondary;
+export default SecondHeadlinesComponent;

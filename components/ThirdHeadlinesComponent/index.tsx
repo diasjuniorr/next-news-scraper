@@ -6,7 +6,7 @@ interface HeadlineProps {
   headline: Headline;
 }
 
-const HeadlineComponent: React.FC<HeadlineProps> = ({ headline }) => {
+const ThirdHeadlinesComponent: React.FC<HeadlineProps> = ({ headline }) => {
   const link = `/article/${headline.href}`;
 
   return (
@@ -33,4 +33,4 @@ const HeadlineComponent: React.FC<HeadlineProps> = ({ headline }) => {
   );
 };
 
-export default HeadlineComponent;
+export default ThirdHeadlinesComponent;

@@ -1,12 +1,11 @@
-import Link from "next/link";
-import { Box, Typography } from "@mui/material";
+import { Box} from "@mui/material";
 import Headline from "../../interfaces/Headline";
 
 interface HeadlinePrimaryProps {
   headline: Headline;
 }
 
-const HeadlinePrimary: React.FC<HeadlinePrimaryProps> = ({ headline }) => {
+const FirstHeadlinesComponent: React.FC<HeadlinePrimaryProps> = ({ headline }) => {
   const link = `/article/${headline.href}`;
 
   return (
@@ -22,4 +21,4 @@ const HeadlinePrimary: React.FC<HeadlinePrimaryProps> = ({ headline }) => {
   );
 };
 
-export default HeadlinePrimary;
+export default FirstHeadlinesComponent;

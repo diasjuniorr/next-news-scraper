@@ -2,12 +2,12 @@ import type { GetStaticProps } from "next";
 import { getArticles } from "./api/articles";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import HeadlinePrimary from "../components/HeadlinePrimary";
-import HeadlineComponent from "../components/HeadlineComponent";
+import FirstHeadlinesComponent from "../components/FirstHeadlinesComponent";
+import SecondHeadlinesComponent from "../components/SecondHeadlinesComponent";
+import ThirdHeadlinesComponent from "../components/ThirdHeadlinesComponent";
 import DiscoverComponent from "../components/DiscoverComponent";
 import SectionComponent from "../components/SectionComponent";
 import FavoriteContainer from "../components/FavoriteContainer";
-import HeadlineSecondary from "../components/HeadlineSecondary";
 import Layout from "../components/layout/layout";
 import Headline from "../interfaces/Headline";
 import Discover from "../interfaces/Discover";
@@ -35,10 +35,12 @@ export default function Home({ articles }: ArticlesListPageProps) {
           borderBottom={"1px solid lightgray"}
         >
           <Grid item xs={12} sm={12} md={8} lg={6}>
-            <HeadlinePrimary headline={headlines[0]} />
+            <FirstHeadlinesComponent
+              headline={getFirstHeadlinesData(headlines)}
+            />
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={3}>
-            <HeadlineSecondary
+            <SecondHeadlinesComponent
               firstItem={headlines[1]}
               secondItem={headlines[2]}
             />
@@ -48,10 +50,10 @@ export default function Home({ articles }: ArticlesListPageProps) {
           </Grid>
         </Grid>
         <Grid container spacing={3} paddingTop={2}>
-          {headlines.slice(3, 7).map((headline, idx) => {
+          {getThirdHeadlinesData(headlines).map((headline, idx) => {
             return (
               <Grid key={idx} item xs={6} sm={6} md={3} lg={3}>
-                <HeadlineComponent headline={headline} />
+                <ThirdHeadlinesComponent headline={headline} />
               </Grid>
             );
           })}
@@ -83,6 +85,18 @@ export default function Home({ articles }: ArticlesListPageProps) {
       </Container>
     </Layout>
   );
+}
+
+function getFirstHeadlinesData(headlines: Headline[]) {
+  return headlines[0];
+}
+
+function getSecondHeadlinesData(headlines: Headline[]) {
+  return headlines.slice(1, 3);
+}
+
+function getThirdHeadlinesData(headlines: Headline[]) {
+  return headlines.slice(3, 7);
 }
 
 export const getStaticProps: GetStaticProps = async () => {
