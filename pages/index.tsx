@@ -37,12 +37,14 @@ export default function Home({ articles }: ArticlesListPageProps) {
           <Grid item xs={12} sm={12} md={8} lg={6}>
             <HeadlinePrimary headline={headlines[0]} />
           </Grid>
+
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <HeadlineSecondary
               firstItem={headlines[1]}
               secondItem={headlines[2]}
             />
           </Grid>
+          
           <Grid item xs={12} sm={6} md={12} lg={3}>
             <FavoriteContainer favorites={favorites} />
           </Grid>
@@ -73,17 +75,16 @@ export default function Home({ articles }: ArticlesListPageProps) {
             );
           })}
         </Grid>
-        <div>
-          <Grid container spacing={3} paddingTop={2}>
-            {sections.map((section, idx) => {
-              return (
-                <Grid key={idx} item xs={12} sm={12} md={12} lg={3}>
-                  <SectionComponent section={section} />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </div>
+
+        <Grid container spacing={3} paddingTop={2}>
+          {sections.map((section, idx) => {
+            return (
+              <Grid key={idx} item xs={12} sm={12} md={12} lg={3}>
+                <SectionComponent section={section} />
+              </Grid>
+            );
+          })}
+        </Grid>
       </Container>
     </Layout>
   );
