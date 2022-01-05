@@ -39,7 +39,7 @@ export default async function handler(
             paragraphs.push($(el).text());
           });
 
-          return res.status(200).json({ title, paragraphs });
+          res.status(200).json({ title, paragraphs });
           resolve();
         })
         .catch((err) => {
