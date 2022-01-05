@@ -47,19 +47,15 @@ export default function Home({ articles }: ArticlesListPageProps) {
             <FavoriteContainer favorites={favorites} />
           </Grid>
         </Grid>
+
         <Grid container spacing={3} paddingTop={2}>
-          <Grid item xs={6} sm={6} md={3} lg={3}>
-            <HeadlineComponent headline={headlines[3]} />
-          </Grid>
-          <Grid item xs={6} sm={6} md={3} lg={3}>
-            <HeadlineComponent headline={headlines[4]} />
-          </Grid>
-          <Grid item xs={6} sm={6} md={3} lg={3}>
-            <HeadlineComponent headline={headlines[5]} />
-          </Grid>
-          <Grid item xs={6} sm={6} md={3} lg={3}>
-            <HeadlineComponent headline={headlines[6]} />
-          </Grid>
+          {headlines.slice(3, 7).map((headline, idx) => {
+            return (
+              <Grid key={idx} item xs={6} sm={6} md={3} lg={3}>
+                <HeadlineComponent headline={headline} />
+              </Grid>
+            );
+          })}
         </Grid>
 
         <Grid
