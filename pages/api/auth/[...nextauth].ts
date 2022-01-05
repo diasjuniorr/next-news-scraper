@@ -1,7 +1,9 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const url = process.env.NEXT_PUBLIC_VERCEL_URL? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`: "http://localhost:3000"
+const url = process.env.NEXT_PUBLIC_VERCEL_URL
+  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  : "http://localhost:3000";
 
 export default NextAuth({
   providers: [
@@ -37,25 +39,24 @@ export default NextAuth({
         // Return null if user data could not be retrieved
         return null;
       },
-
     }),
   ],
   callbacks: {
-      jwt: async ({token, user}) => {
-          if (user) {
-              token.id
-          }
-          return token
-      },
-      session: ({ session, token }) => {
-        if (token){
-            session.id = token.id
-        }
-        return session
-      }},
+    jwt: async ({ token, user }) => {
+      if (user) {
+        token.id;
+      }
+      return token;
+    },
+    session: ({ session, token }) => {
+      if (token) {
+        session.id = token.id;
+      }
+      return session;
+    },
+  },
   secret: "my-secret-key",
   jwt: {
-      secret: "my-secret-key",
-      
-  }
+    secret: "my-secret-key",
+  },
 });
