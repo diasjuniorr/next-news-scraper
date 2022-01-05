@@ -6,7 +6,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { Container, Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
-import Layout from "../../components/layout";
+import Layout from "../../components/layout/layout";
 
 interface Article {
   title: string;

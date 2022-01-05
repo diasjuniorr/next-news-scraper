@@ -19,32 +19,10 @@ a:hover {
 * {
   box-sizing: border-box;
 }
-.navbar > button {
-  float: right;
-}
 
-.headlines-favorites-container {
-  background-color: #F5F4EE;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 16px;
-  height: 100%;
-}
 
 .no-text-decoration:hover {
   text-decoration: transparent;
-}
-
-.headlines-bottom-left-container {
-  display: flex;
-  flex: 1 1 100%;
-}
-
-.headlines-bottom-right-container {
-  background: blue;
-  display: flex;
-  flex: 1 1 100%;
 }
 
 .discovers-container {
@@ -60,33 +38,7 @@ a:hover {
   margin-left: 12px;
 }
 
-.favorites-container span {
-  font-size: 22px;
-  font-weight: bold;
-  margin-right: 4px;
-}
-
-.favorites-item {
-  font-size: 21px;
-}
-
-.headlines-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.sections-container {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid #000;
-}
-
 .sections-container > a {
   margin-top: 12px;
 }
 
-.lists-article-container {
-  margin-top: 12px;
-  padding-top: 4px;
-  border-top: 1px solid lightgray;
-}

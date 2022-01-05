@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Headline from "../../interfaces/Headline";
 
 interface HeadlineSecondaryProps {
@@ -14,7 +14,7 @@ const HeadlineSecondary: React.FC<HeadlineSecondaryProps> = ({
   const secondLink = `/article/${secondItem.href}`;
 
   return (
-    <div className="headlines-secondary">
+    <Box>
       <a href={firstLink}>
         <img
           src={firstItem.img as string}
@@ -34,7 +34,11 @@ const HeadlineSecondary: React.FC<HeadlineSecondaryProps> = ({
           {firstItem.content}
         </Typography>
       </a>
-      <div style={{ borderTop: "1px solid lightgray" }}>
+      <Box
+        sx={{
+          borderTop: "1px solid lighgray",
+        }}
+      >
         <a href={secondLink}>
           <Typography variant="h6" component="h2">
             {secondItem.title}
@@ -49,8 +53,8 @@ const HeadlineSecondary: React.FC<HeadlineSecondaryProps> = ({
             {secondItem.content}
           </Typography>
         </a>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

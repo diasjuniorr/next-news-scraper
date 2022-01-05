@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Headline from "../../interfaces/Headline";
 
 interface HeadlinePrimaryProps {
@@ -10,7 +10,7 @@ const HeadlinePrimary: React.FC<HeadlinePrimaryProps> = ({ headline }) => {
   const link = `/article/${headline.href}`;
 
   return (
-    <div className="headlines-primary">
+    <Box>
       <a href={link}>
         <>
           <img src={headline.img} style={{ maxWidth: "100%" }} alt="" />
@@ -18,7 +18,7 @@ const HeadlinePrimary: React.FC<HeadlinePrimaryProps> = ({ headline }) => {
           <p>{headline.content}</p>
         </>
       </a>
-    </div>
+    </Box>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Link from "next/link";
 import Headline from "../../interfaces/Headline";
 
@@ -10,7 +10,7 @@ const HeadlineComponent: React.FC<HeadlineProps> = ({ headline }) => {
   const link = `/article/${headline.href}`;
 
   return (
-    <div className="headlines-container">
+    <Box>
       <Link href={link}>
         <a>
           <img
@@ -29,7 +29,7 @@ const HeadlineComponent: React.FC<HeadlineProps> = ({ headline }) => {
           </Typography>
         </a>
       </Link>
-    </div>
+    </Box>
   );
 };
 

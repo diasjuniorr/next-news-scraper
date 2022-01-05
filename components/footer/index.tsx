@@ -1,9 +1,9 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 
 export default function Footer() {
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         width: "100vw",
         height: "220px",
         marginTop: "64px",
@@ -24,7 +24,7 @@ export default function Footer() {
           <Grid item xs={12} sm={12} md={4} lg={4} textAlign="center">
             <a href="#" style={{color: "#fff"}}>
               <Typography variant="h4" style={{ color: "#fff" }}>
-                Subscripe
+               Subscribe 
               </Typography>
             </a>
           </Grid>
@@ -37,6 +37,6 @@ export default function Footer() {
           </Grid>
         </Grid>
       </Container>
-    </div>
+    </Box>
   );
 }

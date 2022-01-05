@@ -8,7 +8,7 @@ import DiscoverComponent from "../components/DiscoverComponent";
 import SectionComponent from "../components/SectionComponent";
 import FavoriteContainer from "../components/FavoriteContainer";
 import HeadlineSecondary from "../components/HeadlineSecondary";
-import Layout from "../components/layout";
+import Layout from "../components/layout/layout";
 import Headline from "../interfaces/Headline";
 import Discover from "../interfaces/Discover";
 import Favorite from "../interfaces/Favorite";
