@@ -22,33 +22,31 @@ const loadingParagraphs = [1, 2, 3, 4, 5, 6, 7, 8];
 const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
   const { data: session, status } = useSession();
 
-  {
-    if (status === "authenticated") {
-      return (
-        <Layout maxWidth="md">
-          <Container component="main" maxWidth="md">
-            <Box
-              sx={{
-                marginTop: 2,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                minHeight: "50vh",
-              }}
-            >
-              <Typography component="h1" variant="h2" marginBottom={4}>
-                {article.title}
+  if (status === "authenticated") {
+    return (
+      <Layout maxWidth="md">
+        <Container component="main" maxWidth="md">
+          <Box
+            sx={{
+              marginTop: 2,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              minHeight: "50vh",
+            }}
+          >
+            <Typography component="h1" variant="h2" marginBottom={4}>
+              {article.title}
+            </Typography>
+            {article.paragraphs?.map((paragraph, index) => (
+              <Typography key={index} marginBottom={2}>
+                {paragraph}
               </Typography>
-              {article.paragraphs?.map((paragraph, index) => (
-                <Typography key={index} marginBottom={2}>
-                  {paragraph}
-                </Typography>
-              ))}
-            </Box>
-          </Container>
-        </Layout>
-      );
-    }
+            ))}
+          </Box>
+        </Container>
+      </Layout>
+    );
   }
 
   if (status === "unauthenticated") {
