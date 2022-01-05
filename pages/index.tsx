@@ -81,39 +81,13 @@ export default function Home({ articles }: ArticlesListPageProps) {
         </Grid>
         <div>
           <Grid container spacing={3} paddingTop={2}>
-            <Grid item xs={12} sm={12} md={12} lg={3}>
-              <SectionComponent section={sections[0]} />
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={3}>
-              <SectionComponent section={sections[1]} />
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={3}>
-              <SectionComponent section={sections[2]} />
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={3}>
-              <SectionComponent section={sections[3]} />
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={3} paddingTop={2}>
-            <Grid item xs={12} sm={12} md={12} lg={3}>
-              <SectionComponent section={sections[4]} />
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={3}>
-              <SectionComponent section={sections[5]} />
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={3}>
-              <SectionComponent section={sections[6]} />
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={3}>
-              <SectionComponent section={sections[7]} />
-            </Grid>
+            {sections.map((section, idx) => {
+              return (
+                <Grid key={idx} item xs={12} sm={12} md={12} lg={3}>
+                  <SectionComponent section={section} />
+                </Grid>
+              );
+            })}
           </Grid>
         </div>
       </Container>
