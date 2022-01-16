@@ -19,7 +19,7 @@ export default async function handler(
   return new Promise<void>(async (resolve, reject) => {
     const { method } = req;
 
-    if (method !== "POST") {
+    if (method !== "GET") {
       return res.status(405).json({ error: "Method not allowed" });
     }
 
