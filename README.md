@@ -34,7 +34,7 @@ To run it locally:
 npm run dev
 ```
 
-To test it locally:
+To test the API locally:
 
 ```
 npm run test
@@ -56,7 +56,7 @@ npm run start
 
 The user experience should be similar to the one in the [economist](https://www.economist.com) website.
 
-Credential to login:
+Credentials to login:
 ```
 user: guest
 password: guest
