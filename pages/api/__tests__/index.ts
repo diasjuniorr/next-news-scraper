@@ -42,12 +42,13 @@ describe("should return items", () => {
     const response = await request.agent(server).get("/api/articles");
 
     for (let i = 0; i < headlinesCount; i++) {
+      console.log("DEBUG: ", response.body);
       expect(response.body.headlines[i].href).toBeDefined();
       expect(response.body.headlines[i].title).toBeDefined();
     }
 
     for (let i = 0; i < discoversCount; i++) {
-      expect(response.body.discovers[i].href).toBeDefined();
+      expect(response.body.discovers[i].href).toBeTruthy();
       expect(response.body.discovers[i].title).toBeDefined();
     }
 
