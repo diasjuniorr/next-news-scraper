@@ -6,9 +6,9 @@ interface SectionProps {
 }
 
 const DiscoverComponent: React.FC<SectionProps> = ({ section }) => {
-  const firstLink = `/articles/${section.list[0].href}`;
-  const secondLink = `/articles/${section.list[1].href}`;
-  const thirdLink = `/articles/${section.list[2].href}`;
+  const firstLink = `/articles/${section.sectionArticles[0].href}`;
+  const secondLink = `/articles/${section.sectionArticles[1].href}`;
+  const thirdLink = `/articles/${section.sectionArticles[2].href}`;
 
   return (
     <>
@@ -18,11 +18,11 @@ const DiscoverComponent: React.FC<SectionProps> = ({ section }) => {
         }}
       >
         <Typography variant="h6" component="h2" fontWeight={600}>
-          {section.section}
+          {section.sectionTitle}
         </Typography>
         <a href={firstLink}>
-          <img src={section.list[0].img} style={{ maxWidth: "100%" }} alt="" />
-          <Typography variant="h6">{section.list[0].title}</Typography>
+          <img src={section.sectionArticles[0].img} style={{ maxWidth: "100%" }} alt="" />
+          <Typography variant="h6">{section.sectionArticles[0].title}</Typography>
         </a>
       </Box>
       <Box
@@ -33,7 +33,7 @@ const DiscoverComponent: React.FC<SectionProps> = ({ section }) => {
         }}
       >
         <a href={secondLink}>
-          <Typography variant="h6">{section.list[1].title}</Typography>
+          <Typography variant="h6">{section.sectionArticles[1].title}</Typography>
         </a>
       </Box>
       <Box
@@ -44,7 +44,7 @@ const DiscoverComponent: React.FC<SectionProps> = ({ section }) => {
         }}
       >
         <a href={thirdLink}>
-          <Typography variant="h6">{section.list[2].title}</Typography>
+          <Typography variant="h6">{section.sectionArticles[2].title}</Typography>
         </a>
       </Box>
     </>

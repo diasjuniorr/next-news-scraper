@@ -7,7 +7,7 @@ import Favorite from "../../../interfaces/Favorite";
 import Section from "../../../interfaces/Section";
 import List from "../../../interfaces/List";
 
-const website = "https://www.economist.com";
+const url = "https://www.economist.com";
 
 interface ArticlesResponse {
   headlines: Headline[];
@@ -28,77 +28,37 @@ export default async function handler(
     const articles = await getArticles();
     return res.status(200).json(articles);
   } catch (error: any) {
-    console.log("request failed: ", error);
+    console.log("fetching articles failed: ", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 }
 
 export async function getArticles(): Promise<ArticlesResponse | Err> {
   try {
-    const response = await http(website);
+    const response = await http(url);
     const data = await response.text();
     const $ = cheerio.load(data);
 
     const headlines: Headline[] = [];
     const favorites: Favorite[] = [];
     const sections: Section[] = [];
-    const lists: List[][] = [];
+    const sectionArticlesLists: List[][] = [];
     let discovers: Discover[] = [];
 
     $("a", data).each((idx, el) => {
-      const attr = $(el).attr("data-analytics");
-      if (typeof attr !== typeof undefined) {
-        if ($(el).attr("data-analytics")?.includes("top_stories")) {
-          const title = $(el).text();
-          const content = $(el).parent().parent().find("p").last().text();
-          const img = $(el).parent().siblings().find("img").attr("src") || "";
-          let href = $(el).attr("href") || "";
+      if ($(el).attr("data-analytics")?.includes("top_stories")) {
+        const headline = scrapHeadline($(el));
+        headlines.push(headline);
+      }
 
-          if (href) {
-            href = encodeQuestionMark(encodeSlash(removeBaseURL(href)));
-          }
+      if ($(el).attr("data-analytics")?.includes("discover_rail")) {
+        const discover = scrapDiscover($(el));
+        discovers.push(discover);
+      }
 
-          headlines.push({
-            title,
-            content,
-            href,
-            img,
-          });
-        }
-
-        if ($(el).attr("data-analytics")?.includes("discover_rail")) {
-          const title = $(el).text();
-          const content = $(el).parent().siblings().text();
-          const img =
-            $(el).parent().parent().parent().parent().find("img").attr("src") ||
-            "";
-          let href = $(el).attr("href") || "";
-
-          if (href) {
-            href = encodeQuestionMark(encodeSlash(removeBaseURL(href)));
-          }
-
-          discovers.push({
-            title,
-            href,
-            content,
-            img,
-          });
-        }
-
-        if ($(el).attr("data-analytics")?.includes("readers_favourites")) {
-          const title = $(el).text();
-          let href = $(el).attr("href") || "";
-
-          if (href) {
-            href = encodeQuestionMark(encodeSlash(removeBaseURL(href)));
-          }
-
-          favorites.push({
-            title,
-            href,
-          });
-        }
+      if ($(el).attr("data-analytics")?.includes("readers_favourites")) {
+        const favorite = scrapFavorite($(el));
+        favorites.push(favorite);
       }
     });
 
@@ -106,50 +66,100 @@ export async function getArticles(): Promise<ArticlesResponse | Err> {
       const firstLi = $(el).children().first();
 
       if (firstLi.hasClass("_lead-article")) {
-        const ul: List[] = [];
-        const s = $(el).parent().find(".ds-section-headline-link").text();
+        const sectionArticles: List[] = [];
+        const sectionTitle = $(el)
+          .parent()
+          .find(".ds-section-headline-link")
+          .text();
+
         const section: Section = {
-          section: s,
-          list: ul,
+          sectionTitle,
+          sectionArticles,
         };
 
         $(el)
           .children()
           .each((idx, li) => {
-            const a = $(li).find("a");
-            const title = a.text();
-            const img = $(li).find("img").attr("src") || "";
-            let href = a.attr("href") || "";
-
-            if (href) {
-              href = encodeQuestionMark(encodeSlash(removeBaseURL(href)));
-            }
-
-            ul.push({ title, href, img });
+            const sectionArticle = scrapSectionArticle($(li));
+            sectionArticles.push(sectionArticle);
           });
 
-        lists.push(ul);
+        sectionArticlesLists.push(sectionArticles);
         sections.push(section);
       }
     });
 
+    //original page renders the discover rail twice
     discovers = discovers.slice(0, 3);
 
     return { headlines, discovers, favorites, sections };
   } catch (e) {
-    console.log(e);
+    console.log("scraping articles failed: ", e);
     throw e;
   }
+}
+
+function scrapHeadline(node: any) {
+  const title = node.text();
+  const content = node.parent().parent().find("p").last().text();
+  const img = node.parent().siblings().find("img").attr("src") || "";
+  let href = node.attr("href") || "";
+
+  if (href) {
+    href = encodeQuestionMark(encodeSlash(removeBaseURL(href)));
+  }
+
+  return { title, content, img, href };
+}
+
+function scrapDiscover(node: any) {
+  const title = node.text();
+  const content = node.parent().siblings().text();
+  const img =
+    node.parent().parent().parent().parent().find("img").attr("src") || "";
+  let href = node.attr("href") || "";
+
+  if (href) {
+    href = encodeQuestionMark(encodeSlash(removeBaseURL(href)));
+  }
+
+  return { title, content, href, img };
+}
+
+function scrapFavorite(node: any) {
+  const title = node.text();
+  let href = node.attr("href") || "";
+
+  if (href) {
+    href = encodeQuestionMark(encodeSlash(removeBaseURL(href)));
+  }
+
+  return { title, href };
+}
+
+function scrapSectionArticle(node: any) {
+  const a = node.find("a");
+  const title = a.text();
+  const img = node.find("img").attr("src") || "";
+  let href = a.attr("href") || "";
+
+  if (href) {
+    href = encodeQuestionMark(encodeSlash(removeBaseURL(href)));
+  }
+
+  return { title, href, img };
 }
 
 function removeBaseURL(url: string) {
   return url.replace(/https:\/\/www.economist.com/g, "");
 }
 
+//encode slashes to prevent browser from parsing them as urls
 function encodeSlash(url: string) {
   return url.replace(/\//g, "___");
 }
 
+//encode question marks to prevent browser from parsing them as params
 function encodeQuestionMark(url: string) {
   return url.replace(/\?/g, "---");
 }
