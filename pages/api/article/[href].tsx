@@ -23,8 +23,7 @@ export default async function handler(
       return res.status(405).json({ error: "Method not allowed" });
     }
 
-    const router = useRouter();
-    let { href } = router.query;
+    let { href } = req.query;
 
     if (!href) {
       return res.status(404).json({ error: "No href" });

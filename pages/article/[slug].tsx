@@ -1,5 +1,5 @@
 import React from "react";
-import http from "../../util/http";
+import { http } from "../../util/http";
 import { useSession, signIn } from "next-auth/react";
 
 import { GetServerSideProps, NextPage } from "next";
@@ -92,8 +92,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { slug } = context.params;
-  const res = await http.post("article", { slug });
-  const article = res.data;
+  const article = await http(`http://localhost:3000/api/article/${slug}`);
 
   return {
     props: { article },
