@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { useRouter } from "next/router";
 import axios from "axios";
 import * as cheerio from "cheerio";
 
@@ -19,16 +20,21 @@ export default async function handler(
     const { method } = req;
 
     if (method !== "POST") {
-      res.status(404).json({ error: "Method not allowed" });
-      return;
+      return res.status(405).json({ error: "Method not allowed" });
     }
 
-    let { slug } = await req.body;
-    slug = decodeQuestionMark(decodeSlash(slug));
+    const router = useRouter();
+    let { href } = router.query;
+
+    if (!href) {
+      return res.status(404).json({ error: "No href" });
+    }
+
+    href = decodeQuestionMark(decodeSlash(href as string));
     const paragraphs: string[] = [];
 
     try {
-      axios(`https://www.economist.com${slug}`)
+      axios(`https://www.economist.com${href}`)
         .then((response) => {
           const data = response.data;
           const $ = cheerio.load(data);
