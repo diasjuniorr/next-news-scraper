@@ -92,49 +92,21 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { slug } = context.params;
-  const article = await http(`http://localhost:3000/api/article/${slug}`);
 
-  return {
-    props: { article },
-  };
+  try {
+    const response = await http(`http://localhost:3000/api/article/${slug}`);
+    const article = await response.json();
+
+    return {
+      props: { article },
+    };
+  } catch (e) {
+    console.log("getServerSideProps failed: ",e);
+
+    return {
+      notFound: true,
+    };
+  }
 };
-
-// example of static generated page
-// interface Path {
-//   params: { slug: string };
-// }
-
-// export const getStaticPaths: GetStaticPaths = async (context: any) => {
-//   const res = await http("articles");
-//   const articles = await res.data;
-
-//   let paths: Path[] = [];
-
-//   articles.headlines.map((article: Headline) =>
-//     paths.push({ params: { slug: article.href } })
-//   );
-
-//   articles.discovers.map((article: Discover) =>
-//     paths.push({ params: { slug: article.href } })
-//   );
-
-//   articles.favorites.map((article: Favorite) =>
-//     paths.push({ params: { slug: article.href } })
-//   );
-
-//   articles.sections.map((article: Section) =>
-//     article.list.map((item) => paths.push({ params: { slug: item.href } }))
-//   );
-
-//   return { paths, fallback: false };
-// };
-
-// export const getStaticProps: GetStaticProps = async (context: any) => {
-//   const { slug } = context.params;
-//   const res = await http.post("article", { slug });
-//   const article = res.data;
-
-//   return { props: { article }, revalidate: 1 * 60 * 5 };
-// };
 
 export default ArticlePage;
