@@ -8,6 +8,10 @@ import { Box } from "@mui/system";
 
 import Layout from "../../components/layout/layout";
 
+const url = process.env.NEXT_PUBLIC_VERCEL_URL
+  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  : "http://localhost:3000";
+
 interface Article {
   title: string;
   paragraphs: string[];
@@ -94,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { slug } = context.params;
 
   try {
-    const response = await http(`http://localhost:3000/api/article/${slug}`);
+    const response = await http(`${url}/api/article/${slug}`);
     const article = await response.json();
 
     return {
