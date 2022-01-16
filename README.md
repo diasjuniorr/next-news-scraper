@@ -65,10 +65,4 @@ password: guest
 ## API <a name = "api"></a>
 
 - **GET** `/api/articles`
-- **POST** `/api/article`
-```
-//body
-{
-    "slug": <article-href-as-returned-by-the-api>
-}
-```
+- **GET** `/api/articles/:href`

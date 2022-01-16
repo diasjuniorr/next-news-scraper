@@ -7,7 +7,7 @@ interface HeadlineProps {
 }
 
 const ThirdHeadlinesComponent: React.FC<HeadlineProps> = ({ headline }) => {
-  const link = `/article/${headline.href}`;
+  const link = `/articles/${headline.href}`;
 
   return (
     <Box>

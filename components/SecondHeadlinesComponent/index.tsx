@@ -10,8 +10,8 @@ const SecondHeadlinesComponent: React.FC<HeadlineSecondaryProps> = ({
   firstItem,
   secondItem,
 }) => {
-  const firstLink = `/article/${firstItem.href}`;
-  const secondLink = `/article/${secondItem.href}`;
+  const firstLink = `/articles/${firstItem.href}`;
+  const secondLink = `/articles/${secondItem.href}`;
 
   return (
     <Box>

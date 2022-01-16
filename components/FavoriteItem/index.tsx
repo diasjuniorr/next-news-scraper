@@ -7,7 +7,7 @@ interface FavoriteProps {
 }
 
 const FavoriteItem: React.FC<FavoriteProps> = ({ favorite, index }) => {
-  const link = `/article/${favorite.href}`;
+  const link = `/articles/${favorite.href}`;
 
   return (
     <Box>

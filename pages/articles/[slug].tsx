@@ -98,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { slug } = context.params;
 
   try {
-    const response = await http(`${url}/api/article/${slug}`);
+    const response = await http(`${url}/api/articles/${slug}`);
     const article = await response.json();
 
     return {

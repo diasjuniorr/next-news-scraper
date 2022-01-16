@@ -6,9 +6,9 @@ interface SectionProps {
 }
 
 const DiscoverComponent: React.FC<SectionProps> = ({ section }) => {
-  const firstLink = `/article/${section.list[0].href}`;
-  const secondLink = `/article/${section.list[1].href}`;
-  const thirdLink = `/article/${section.list[2].href}`;
+  const firstLink = `/articles/${section.list[0].href}`;
+  const secondLink = `/articles/${section.list[1].href}`;
+  const thirdLink = `/articles/${section.list[2].href}`;
 
   return (
     <>

@@ -7,7 +7,7 @@ interface DiscoverProps {
 }
 
 const DiscoverComponent: React.FC<DiscoverProps> = ({ discover }) => {
-  const link = `/article/${discover.href}`;
+  const link = `/articles/${discover.href}`;
 
   return (
     <div className="discovers-container">

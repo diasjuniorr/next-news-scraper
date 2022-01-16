@@ -6,7 +6,7 @@ interface HeadlinePrimaryProps {
 }
 
 const FirstHeadlinesComponent: React.FC<HeadlinePrimaryProps> = ({ headline }) => {
-  const link = `/article/${headline.href}`;
+  const link = `/articles/${headline.href}`;
 
   return (
     <Box>
