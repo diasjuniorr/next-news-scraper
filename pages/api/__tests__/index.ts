@@ -5,7 +5,7 @@ import handler from "../articles/index";
 
 process.env.ECONOMIST_URL = "https://www.economist.com/";
 
-describe("should return items", () => {
+describe("Testing if the scraping strategy still works", () => {
   const apiPreviewPropsMock = {
     previewModeId: "id",
     previewModeEncryptionKey: "key",
@@ -43,24 +43,24 @@ describe("should return items", () => {
 
     for (let i = 0; i < headlinesCount; i++) {
       console.log("DEBUG: ", response.body);
-      expect(response.body.headlines[i].href).toBeDefined();
-      expect(response.body.headlines[i].title).toBeDefined();
+      expect(response.body.headlines[i].href).toBeTruthy();
+      expect(response.body.headlines[i].title).toBeTruthy();
     }
 
     for (let i = 0; i < discoversCount; i++) {
       expect(response.body.discovers[i].href).toBeTruthy();
-      expect(response.body.discovers[i].title).toBeDefined();
+      expect(response.body.discovers[i].title).toBeTruthy();
     }
 
     for (let i = 0; i < favoritesCount; i++) {
-      expect(response.body.favorites[i].href).toBeDefined();
-      expect(response.body.favorites[i].title).toBeDefined();
+      expect(response.body.favorites[i].href).toBeTruthy();
+      expect(response.body.favorites[i].title).toBeTruthy();
     }
 
     for (let i = 0; i < sectionsCount; i++) {
-      expect(response.body.sections[i].section).toBeDefined();
+      expect(response.body.sections[i].section).toBeTruthy();
       for (let j = 0; j < sectionsListCount; j++) {
-        expect(response.body.sections[i].list[j]).toBeDefined();
+        expect(response.body.sections[i].list[j]).toBeTruthy();
       }
     }
 

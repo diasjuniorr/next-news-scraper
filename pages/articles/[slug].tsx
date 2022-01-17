@@ -97,20 +97,17 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { slug } = context.params;
 
-  try {
-    const response = await http(`${url}/api/articles/${slug}`);
-    const article = await response.json();
-
-    return {
-      props: { article },
-    };
-  } catch (e) {
-    console.log("getServerSideProps failed: ",e);
-
+  const response = await http(`${url}/api/articles/${slug}`);
+  if (response.status !== 200) {
     return {
       notFound: true,
     };
   }
+
+  const article = await response.json();
+  return {
+    props: { article },
+  };
 };
 
 export default ArticlePage;
