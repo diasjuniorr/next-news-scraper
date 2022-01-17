@@ -42,7 +42,6 @@ describe("Testing if the scraping strategy still works", () => {
     const response = await request.agent(server).get("/api/articles");
 
     for (let i = 0; i < headlinesCount; i++) {
-      console.log("DEBUG: ", response.body);
       expect(response.body.headlines[i].href).toBeTruthy();
       expect(response.body.headlines[i].title).toBeTruthy();
     }
