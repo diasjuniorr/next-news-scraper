@@ -32,7 +32,7 @@ describe("Testing if the scraping strategy still works", () => {
     expect(response.body.sections.length).toEqual(sectionsCount);
 
     for (let i = 0; i < sectionsCount; i++) {
-      expect(response.body.sections[i].list.length).toEqual(sectionsListCount);
+      expect(response.body.sections[i].sectionArticles.length).toEqual(sectionsListCount);
     }
     server.close();
   });
@@ -58,9 +58,9 @@ describe("Testing if the scraping strategy still works", () => {
     }
 
     for (let i = 0; i < sectionsCount; i++) {
-      expect(response.body.sections[i].section).toBeTruthy();
+      expect(response.body.sections[i].sectionTitle).toBeTruthy();
       for (let j = 0; j < sectionsListCount; j++) {
-        expect(response.body.sections[i].list[j]).toBeTruthy();
+        expect(response.body.sections[i].sectionArticles[j]).toBeTruthy();
       }
     }
 

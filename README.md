@@ -66,8 +66,3 @@ password: guest
 
 - **GET** `/api/articles`
 - **GET** `/api/articles/:href`
-
-## Known Issues
-Jest doesn't support js fetch library. It uses node-fetch but I haven't found a way to type it.
-At the moment tests will fail because of that but I'm working on it. The application is working fine though.
-The API tests are for predicting when scraping is not working anymore.

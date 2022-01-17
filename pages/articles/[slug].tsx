@@ -1,5 +1,4 @@
 import React from "react";
-import { http } from "../../util/http";
 import { useSession, signIn } from "next-auth/react";
 
 import { GetServerSideProps, NextPage } from "next";
@@ -97,7 +96,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { slug } = context.params;
 
-  const response = await http(`${url}/api/articles/${slug}`);
+  const response = await fetch(`${url}/api/articles/${slug}`);
   if (response.status !== 200) {
     return {
       notFound: true,

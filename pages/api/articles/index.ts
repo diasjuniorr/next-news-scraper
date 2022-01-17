@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { http } from "../../../util/http";
+import axios from "axios";
 import * as cheerio from "cheerio";
 import Headline from "../../../interfaces/Headline";
 import Discover from "../../../interfaces/Discover";
@@ -35,8 +35,8 @@ export default async function handler(
 
 export async function getArticles(): Promise<ArticlesResponse | Err> {
   try {
-    const response = await http(url);
-    const data = await response.text();
+    const response = await axios.get(url);
+    const data = response.data;
     const $ = cheerio.load(data);
 
     const headlines: Headline[] = [];

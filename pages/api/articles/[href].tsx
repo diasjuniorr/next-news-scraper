@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { http } from "../../../util/http";
+import axios from "axios";
 import * as cheerio from "cheerio";
 
 interface ArticleResponse {
@@ -31,8 +31,8 @@ export default async function handler(
   const paragraphs: string[] = [];
 
   try {
-    const response = await http(`https://economist.com${href}`);
-    const data = await response.text();
+    const response = await axios.get(`https://economist.com${href}`);
+    const data = response.data;
     const $ = cheerio.load(data);
 
     const title = $("span.article__headline").text();
